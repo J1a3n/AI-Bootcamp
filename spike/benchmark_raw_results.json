@@ -1,0 +1,94 @@
+[
+  {
+    "sample": {
+      "id": "sample1",
+      "name": "Sample 1: Correct Multi-Step Linear Equation",
+      "filename": "sample1_correct.png",
+      "ground_truth_transcription": [
+        "Solve 3(x - 4) = 15",
+        "3x - 12 = 15",
+        "3x = 27",
+        "x = 9"
+      ],
+      "ground_truth_error": "None (Fully correct)",
+      "expected_equivalence": "All lines are mathematically equivalent."
+    },
+    "prompt_a": {
+      "response": "The student's work contains an error. Let's go through the steps to identify it:\n\n1. Start with the equation: \\(3(x - 4) = 15\\).\n2. Distribute the 3: \\(3x - 12 = 15\\).\n3. Add 12 to both sides to isolate the term with \\(x\\): \\(3x = 27\\).\n4. Divide both sides by 3 to solve for \\(x\\): \\(x = 9\\).\n\nThe error occurs in the third step. The student should have added 12 to both sides of the equation, not subtracted 12. The correct step should be:\n\n\\[3x - 12 + 12 = 15 + 12\\]\n\\[3x = 27\\]\n\nSo, the correct solution is \\(x = 9\\), which is correct. The error was in the addition step, but the final solution is still correct. The student should have added 12 to both sides instead of subtracting it.",
+      "latency_sec": 1.55,
+      "tokens_per_sec": 148.9,
+      "completion_tokens": 225,
+      "prompt_tokens": 343,
+      "total_tokens": 568
+    },
+    "prompt_b": {
+      "response": "### Step 1: Transcribe the handwritten math working line-by-line into LaTeX\n\n```latex\n\\documentclass{article}\n\\usepackage{amsmath}\n\n\\begin{document}\n\n\\begin{align*}\n\\text{Solve } 3(x - 4) &= 15 \\\\\n3x - 12 &= 15 \\\\\n3x &= 27 \\\\\nx &= 9\n\\end{align*}\n\n\\end{document}\n```\n\n### Step 2: Check mathematical equivalence between consecutive lines\n\n- **Line 1: \\( 3(x - 4) = 15 \\)**\n- **Line 2: \\( 3x - 12 = 15 \\)**\n\nThe equivalence between Line 1 and Line 2 breaks at the step where the equation is simplified. The correct simplification should be:\n\n\\[\n3(x - 4) = 15 \\implies 3x - 12 = 15\n\\]\n\nThe error in the working is in the simplification of the left-hand side. The correct simplification should be:\n\n\\[\n3(x - 4) = 3x - 12\n\\]\n\nSo, the correct sequence should be:\n\n\\[\n3(x - 4) = 15 \\implies 3x - 12 = 15 \\implies 3x = 27 \\implies x = 9\n\\]\n\nThe error is in the step where \\( 3(x - 4) \\) is simplified to \\( 3x - 12 \\). The correct simplification should be \\( 3x - 12 \\).",
+      "latency_sec": 2.36,
+      "tokens_per_sec": 152.7,
+      "completion_tokens": 352,
+      "prompt_tokens": 369,
+      "total_tokens": 721
+    }
+  },
+  {
+    "sample": {
+      "id": "sample2",
+      "name": "Sample 2: Sign / Transposition Error",
+      "filename": "sample2_sign_error.png",
+      "ground_truth_transcription": [
+        "Solve 2(x + 3) = 14",
+        "2x + 6 = 14",
+        "2x = 14 + 6",
+        "2x = 20",
+        "x = 10"
+      ],
+      "ground_truth_error": "Line 2 (2x = 14 + 6): Transposition error / added 6 instead of subtracting 6.",
+      "expected_equivalence": "Equivalence breaks between Line 1 (2x + 6 = 14) and Line 2 (2x = 14 + 6). Correct step should be 2x = 14 - 6."
+    },
+    "prompt_a": {
+      "response": "The student's work contains an error. Let's go through the steps to identify it:\n\n1. Start with the equation: \\(2(x + 3) = 14\\).\n2. Distribute the 2: \\(2x + 6 = 14\\).\n3. Subtract 6 from both sides to isolate the term with \\(x\\): \\(2x = 14 - 6\\).\n4. Simplify the right side: \\(2x = 8\\).\n5. Divide both sides by 2 to solve for \\(x\\): \\(x = 4\\).\n\nThe student's work shows \\(x = 10\\), which is incorrect. The correct solution is \\(x = 4\\).\n\nThe error occurred in the step where the student added 6 instead of subtracting it. The correct operation should be subtraction to isolate \\(x\\).",
+      "latency_sec": 1.41,
+      "tokens_per_sec": 152.6,
+      "completion_tokens": 184,
+      "prompt_tokens": 366,
+      "total_tokens": 550
+    },
+    "prompt_b": {
+      "response": "Here is the LaTeX transcribed version of the handwritten math working:\n\n```latex\n\\documentclass{article}\n\\usepackage{amsmath}\n\n\\begin{document}\n\nSolve \\(2(x + 3) = 14\\)\n\n\\begin{align*}\n2x + 6 &= 14 \\\\\n2x &= 14 + 6 \\\\\n2x &= 20 \\\\\nx &= 10\n\\end{align*}\n\n\\end{document}\n```\n\nStep 2: Checking the mathematical equivalence between consecutive lines:\n\n- Line 1: \\(2(x + 3) = 14\\)\n- Line 2: \\(2x + 6 = 14\\)\n\nThe equivalence breaks at Line 2. The correct step from Line 1 to Line 2 should be:\n\n\\[ 2(x + 3) = 14 \\]\n\\[ 2x + 6 = 14 \\]\n\nThe error is in the step where \\(2(x + 3)\\) is expanded. The correct expansion should be:\n\n\\[ 2x + 6 = 14 \\]\n\nThis is because \\(2(x + 3)\\) expands to \\(2x + 6\\), not \\(2x + 12\\). The correct solution should be:\n\n\\[ 2x + 6 = 14 \\]\n\\[ 2x = 14 - 6 \\]\n\\[ 2x = 8 \\]\n\\[ x = 4 \\]\n\nSo, the correct value for \\(x\\) is 4, not 10.",
+      "latency_sec": 2.25,
+      "tokens_per_sec": 151.5,
+      "completion_tokens": 333,
+      "prompt_tokens": 392,
+      "total_tokens": 725
+    }
+  },
+  {
+    "sample": {
+      "id": "sample3",
+      "name": "Sample 3: Common Algebraic Misconception (Freshman's Dream)",
+      "filename": "sample3_misconception.png",
+      "ground_truth_transcription": [
+        "Expand and simplify:",
+        "(x + 3)^2 = x^2 + 9"
+      ],
+      "ground_truth_error": "Omission of cross-term 6x in binomial expansion (Freshman's Dream / (a+b)^2 != a^2 + b^2).",
+      "expected_equivalence": "(x + 3)^2 expands to x^2 + 6x + 9, not x^2 + 9."
+    },
+    "prompt_a": {
+      "response": "The student's work contains an error. The correct expansion and simplification of \\((x + 3)^2\\) should be:\n\n\\[\n(x + 3)^2 = x^2 + 6x + 9\n\\]\n\nThe student has missed the middle term, \\(6x\\), which comes from the application of the binomial theorem or the distributive property. The full expansion involves multiplying \\(x + 3\\) by itself:\n\n\\[\n(x + 3)(x + 3) = x^2 + 3x + 3x + 9 = x^2 + 6x + 9\n\\]\n\nSo, the correct answer is \\(x^2 + 6x + 9\\), not \\(x^2 + 9\\).",
+      "latency_sec": 1.23,
+      "tokens_per_sec": 153.8,
+      "completion_tokens": 163,
+      "prompt_tokens": 297,
+      "total_tokens": 460
+    },
+    "prompt_b": {
+      "response": "The given expression is:\n\n\\[\n(x + 3)^2 = x^2 + 9\n\\]\n\nStep 1: Transcribe the expression into LaTeX:\n\n\\[\n(x + 3)^2 = x^2 + 9\n\\]\n\nStep 2: Check the mathematical equivalence between the lines:\n\nThe expression \\((x + 3)^2\\) should be expanded using the binomial theorem or by multiplying the binomial by itself:\n\n\\[\n(x + 3)^2 = (x + 3)(x + 3)\n\\]\n\nExpanding this, we get:\n\n\\[\n(x + 3)(x + 3) = x^2 + 3x + 3x + 9 = x^2 + 6x + 9\n\\]\n\nSo, the correct expansion and simplification of \\((x + 3)^2\\) is:\n\n\\[\n(x + 3)^2 = x^2 + 6x + 9\n\\]\n\nThe given equation \\((x + 3)^2 = x^2 + 9\\) is incorrect because it does not account for the \\(6x\\) term. Therefore, the line where the equivalence breaks is the given equation itself. The correct equation should be:\n\n\\[\n(x + 3)^2 = x^2 + 6x + 9\n\\]",
+      "latency_sec": 1.91,
+      "tokens_per_sec": 151.0,
+      "completion_tokens": 281,
+      "prompt_tokens": 323,
+      "total_tokens": 604
+    }
+  }
+]

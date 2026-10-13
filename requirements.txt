@@ -1,0 +1,6 @@
+# AI Bootcamp Core Dependencies
+requests>=2.31.0
+pydantic>=2.0.0
+Pillow>=10.0.0
+sympy>=1.12
+supabase>=2.0.0
