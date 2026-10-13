@@ -51,7 +51,12 @@ Whenever any model, dependency, or infrastructure component is provisioned or lo
 ### Directive 6: Strict Sequential Blueprint Fidelity
 Follow the exact sequential order of modules from `curriculum_plan.md` (Module 1.0 through Module 3.7). Never skip, compress away, or downplay any section.
 
+### Directive 7: Pro Tier Context Hygiene (`/compact` at Sprint Boundaries)
+* At the conclusion of each Sprint checkpoint and Hardening Audit, the test harness and agent must explicitly advise the learner to execute the `/compact` command.
+* Flushing intermediate CLI logs, raw file dumps, and trace outputs between sprints keeps context size bounded (~25k tokens), eliminating token velocity spikes and guaranteeing that 2-sprint sessions comfortably stay below 5-hour Pro subscription rate limits.
+
 ---
+
 
 ## 2. Sprint-by-Sprint Execution Guide
 
@@ -99,3 +104,45 @@ The agent executes all verifications using standard Python module calls:
 * `python -m harness check 3.2` ──▶ Asynchronous decoupled fast/slow lane pipeline.
 * `python -m harness check 4.1` ──▶ Dual-axis `pgvector` semantic misconception matching.
 * `python -m harness check 4.2` ──▶ Text-to-SQL assistant & Capstone WebP optimization evaluation.
+
+---
+
+## 4. Clean-Slate Workspace Interface Contract (`src/`)
+
+The learner begins with an **empty `src/` workspace** and builds each module incrementally across Sprints 1–4. While the teacher directs all UI, UX, and architectural trade-offs, the agent must ensure the generated Python modules in `src/` expose the following interface contracts expected by the dynamic black-box test suite (`harness/checks/sprint1.py` – `sprint4.py`). Before running any checkpoint, you may also inspect the corresponding check in `harness/checks/` to verify exact assertion keys:
+
+* **Slice 1.1 (`src/engine/connector.py`):**
+  * `LocalEngineConnector`: connects to local `llama.cpp` (`http://127.0.0.1:8082`, `8081`, `8080`) or Ollama (`11434`).
+  * `generate_algebra_solution(equation: str = "3(x - 4) = 15") -> dict`: dispatches live chat completion request and returns `{"equation", "solution", "completion_tokens", "latency_seconds", "generation_tok_s"}`.
+* **Slice 1.2 (`src/web/telemetry.py`):**
+  * `WebTelemetryBridge.query_speedometer(prompt: str, target_model: str = "local_qwen_0_5b") -> dict`:
+    * For `"local_qwen_0_5b"`, queries `LocalEngineConnector` and returns `{"model", "prompt", "output", "prompt_eval_tok_s", "generation_tok_s" (>50), "latency_seconds" (>0), "total_tokens"}`.
+    * For `"cloud_frontier"`, returns cloud reference comparison with `"Cloud"` in `"model"` and `"latency_seconds" > 0`.
+* **Slice 1.3 (`src/bridge/outbound_worker.py`):**
+  * `OutboundWorkerBridge(secret_token: Optional[str] = None)`:
+    * Attributes: `job_queue: list`, `dead_letter_queue: list`, `completed_jobs: list`.
+    * `simulate_attack_unauthenticated(token: Optional[str] = None) -> dict`: uses `secrets.compare_digest`, returning `{"status_code": 401, ...}` on mismatch and `{"status_code": 200, ...}` on match.
+    * `enqueue_job(task_type: str, payload: dict, auth_header: str) -> dict`: validates `"Bearer <token>"` and returns `{"status_code": 200, "job_id": str, "status": "queued"}`.
+    * `run_worker_loop_transient(max_seconds: float = 1.0) -> int`: processes queued jobs, retries failed/poisoned tasks (`payload.get("poison_pill") is True`), isolates tasks exceeding `max_retries` into `dead_letter_queue`, and returns the count of completed jobs.
+* **Slice 2.1 (`src/collector/canvas_filter.py`):**
+  * `CanvasContrastFilter.process_image(image_bytes: bytes, contrast_factor: float = 2.0) -> dict`: enhances contrast and binarizes image via Pillow in `< 60.0ms`, explicitly closes buffers in `finally`, and returns `{"original_size_bytes", "processed_size_bytes" (>0), "render_latency_ms" (<60.0), "contrast_applied": True, "projector_ready": True, "memory_cleaned": True}`.
+* **Slice 2.2 (`src/collector/storage.py`):**
+  * `PersistenceManager(db_path: str = "sandbox_submissions.db", storage_dir: str = "storage_bucket")`:
+    * `upload_submission(sub_id: str, student_alias: str, image_bytes: bytes, topic: str) -> dict`: validates magic bytes (`PNG`, `JPEG`, `WebP`), enforces a `10MB` limit (raising `ValueError` containing `"10MB"` if exceeded), sanitizes `sub_id` against `../` path traversal, writes the file into `storage_dir`, records metadata in SQLite `submissions`, and returns `{"id", "status": "persisted", "storage_bucket": "student-notebooks", "image_path", "created_at"}`.
+    * `restore_after_refresh(sub_id: str) -> Optional[dict]`: queries `submissions` by sanitized ID and returns `{"id", "student_alias", "image_path", "topic", "created_at", "ocr_status"}`.
+* **Slice 3.1 (`src/vision/balanced_evaluator.py`):**
+  * `BalancedVisionEvaluator(host_vl: str = "http://127.0.0.1:8081")`:
+    * `sanitize_latex(raw_text: str) -> str`: strips `<script>` tags and dangerous LaTeX macros (`\input`, `\write18`, etc.).
+    * `evaluate_handwriting(image_input: Union[str, bytes, Path], sample_name: str = "") -> dict`: sends base64 multimodal payload with balanced null-hypothesis prompt to Qwen 2.5-VL and returns `{"sample", "transcription", "status" ("CORRECT" | "INCORRECT"), "line_error" (None for sample1, 2 for sample2), "sanitized": True, "generation_tok_s" (>50), "latency_seconds"}`.
+* **Slice 3.2 (`src/vision/async_pipeline.py`):**
+  * `DecoupledPipeline(max_workers: int = 2)`:
+    * `process_submission_decoupled(image_id: str, image_bytes: bytes, wait_for_completion: bool = True) -> dict`: immediately prepares Fast-Lane and dispatches `BalancedVisionEvaluator` on a background `ThreadPoolExecutor`, returning `{"image_id", "fast_lane": {"display_rendered": True, "latency_seconds" (<0.20), "ui_blocked_seconds": 0.0, "status_badge": "Live"}, "slow_lane": {"task_status": "completed", "worker_latency_seconds", "latex_transcription", "status_badge": "LaTeX Ready", "math_status", "line_error"}}`.
+    * `shutdown()`.
+* **Slice 4.1 (`src/intelligence/vector_engine.py`):**
+  * `DualAxisVectorEngine`:
+    * `query_misconception(teacher_query: str) -> dict`: computes unit-sphere normalized 768-D cosine similarity and returns `{"query", "matched_misconception", "category", "sample_reference", "cosine_similarity", "dimension": 768, "vector_hygiene": "Verified (Unit Sphere Normalized)"}` (mapping sign errors to `sample2_sign_error.png` and distributive property omissions to `sample3_misconception.png`).
+* **Slice 4.2 (`src/intelligence/text_to_sql.py` & `src/intelligence/optimizer.py`):**
+  * `SandboxedTextToSQL(db_path: str = "sandbox_submissions.db")`:
+    * `execute_analytical_query(sql_query: str) -> dict`: blocks SQL comments (`/* */`, `--`), multi-statements (`;`), and DDL/DML verbs (`DROP`, `DELETE`, `ALTER`, `UPDATE`, `INSERT`, etc.) with `{"success": False, "status_code": 403}`, executes valid `SELECT` queries under `PRAGMA query_only = ON;`, and returns `{"success": True, "query", "rows_returned" (>0), "data", "security_status": "Passed Read-Only Engine Sandbox Audit"}`.
+  * `ImageOptimizationPipeline.compress_image_webp(image_bytes: bytes, quality: int = 80) -> dict`: compresses image bytes to `WEBP` via Pillow and returns `{"original_bytes", "compressed_bytes", "reduction_percent" (>0), "compression_time_ms", "orig_upload_latency_sec", "optimized_upload_latency_sec", "format": "WEBP", "fidelity": "100% OCR Equivalence Retained"}`.
+
