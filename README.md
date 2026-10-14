@@ -1,7 +1,6 @@
 # AI Bootcamp: Systems Architecture, Local Infrastructure & Applied AI
 
-> **Target Learner:** Experienced High-School Mathematics Teacher  
-> **Role:** Lead Systems Architect & Product Owner  
+> **Target Learner:** Experienced Secondary School Teacher  
 > **Platform Support:** Google Antigravity (AGY), Claude Code, OpenAI Codex, Cursor  
 > **Curriculum Blueprint:** See [`curriculum_plan.md`](./curriculum_plan.md)
 
@@ -9,11 +8,11 @@
 
 ## Welcome to the Studio
 
-This program is designed for an experienced mathematics educator stepping into the role of **Lead Systems Architect**. You will not be memorizing boilerplate syntax or typing terminal commands. 
+This program is designed for an educator stepping into the role of **Applied AI Architect**. You will not be memorizing boilerplate syntax or typing terminal commands. 
 
 Instead, you direct an autonomous AI agent to design, build, harden, and optimize a production-grade educational platform:
-* Run high-throughput multimodal AI models directly on your home computer's graphics card.
-* Build an instant, sub-second desk-to-projector classroom camera app (PWA).
+* Run multimodal AI models directly on your home computer's graphics card.
+* Build an student desk-to-projector classroom camera app (PWA).
 * Decouple presentation time from machine vision compute using an asynchronous task queue.
 * Organize mathematical misconceptions using high-dimensional vector spaces (`pgvector`) and an AI analytical assistant.
 
