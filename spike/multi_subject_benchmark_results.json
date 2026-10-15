@@ -1,0 +1,357 @@
+{
+  "vision_benchmarks": [
+    {
+      "sample": {
+        "subject": "science",
+        "id": "science_sample1",
+        "name": "Science Sample 1: Correct Cellular Respiration & Mass Balance",
+        "filename": "science_sample1_correct.png",
+        "header": "Balance & classify cellular respiration:",
+        "lines": [
+          "Line 1: C6H12O6 + 6O2 -> 6CO2 + 6H2O + ATP",
+          "Line 2: Reactants: 6 C, 12 H, 18 O",
+          "Line 3: Products: 6 C, 12 H, 18 O (Exothermic)"
+        ],
+        "expected_status": "CORRECT",
+        "expected_line_error": null,
+        "ground_truth_note": "Fully balanced equation (6 C, 12 H, 18 O on both sides) and accurately classified as exothermic energy release."
+      },
+      "prompt_a": {
+        "response": "The student's handwritten work contains a minor error in the balance of the equation for cellular respiration. The equation should be balanced with respect to both atoms and charges. Here is the corrected version:\n\n**Line 1:**\n\\[ \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 \\rightarrow 6\\text{CO}_2 + 6\\text{H}_2\\text{O} + \\text{ATP} \\]\n\nThis equation is balanced with respect to atoms:\n- Carbon (C): 6 on both sides\n- Hydrogen (H): 12 on both sides\n- Oxygen (O): 12 on the reactants side and 18 on the products side (6 from CO2 and 6 from H2O)\n- Oxygen (O) in ATP: 3 (since ATP is typically written as \\(\\text{ATP}\\) and each ATP molecule contains 3 phosphate groups, each with an oxygen atom)\n\nThe student's work correctly identifies the reactants and products, but the balance of the equation should be checked to ensure all atoms are accounted for. The balanced equation should be:\n\n\\[ \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 \\rightarrow 6\\text{CO}_2 + 6\\text{H}_2\\text{O} + \\text{ATP} \\]\n\nThe student's Line 3 is correct in identifying the reactants and products, but the balance of the equation should be verified. The equation is exothermic, which is also correctly noted in Line 3.",
+        "latency_sec": 2.63,
+        "tokens_per_sec": 152.7,
+        "completion_tokens": 356,
+        "prompt_tokens": 381
+      },
+      "prompt_b": {
+        "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: C6H1206 + 602 -> 6CO2 + 6H2O + ATP\n- Line 2: Reactants: 6 C, 12 H, 18 O\n- Line 3: Products: 6 C, 12 H, 18 O (Exothermic)\n\nStep 2: Evaluate each line for domain accuracy, factual validity, and logical consistency.\n- Line 1: The equation is balanced and correctly represents the overall reaction of cellular respiration. The reactants and products are correctly written.\n- Line 2: The reactants are correctly identified as 6 C, 12 H, and 18 O.\n- Line 3: The products are correctly identified as 6 C, 12 H, and 18 O. The term \"Exothermic\" is correctly used to describe the nature of the reaction.\n\nSTATUS: CORRECT\nLINE_ERROR: NONE",
+        "latency_sec": 1.52,
+        "tokens_per_sec": 152.6,
+        "completion_tokens": 221,
+        "prompt_tokens": 491
+      }
+    },
+    {
+      "sample": {
+        "subject": "science",
+        "id": "science_sample2",
+        "name": "Science Sample 2: Stoichiometry / Conservation of Mass Error",
+        "filename": "science_sample2_error.png",
+        "header": "Balance methane combustion reaction:",
+        "lines": [
+          "Line 1: CH4 + 2O2 -> CO2 + 2H2O",
+          "Line 2: Atom count: 1 C, 4 H, and 2 O on both sides",
+          "Line 3: Reaction is balanced."
+        ],
+        "expected_status": "INCORRECT",
+        "expected_line_error": 2,
+        "ground_truth_note": "Line 2 arithmetic/atom-counting error: 2O2 on the left and CO2 + 2H2O on the right contain 4 Oxygen atoms, not 2 Oxygen atoms."
+      },
+      "prompt_a": {
+        "response": "The student's handwritten work for balancing the combustion reaction of methane is mostly correct, but there is a small error in the representation of water. The correct balanced equation for the combustion of methane is:\n\n\\[ \\text{CH}_4 + 2\\text{O}_2 \\rightarrow \\text{CO}_2 + 2\\text{H}_2\\text{O} \\]\n\nThe student has written the equation as:\n\n\\[ \\text{CH}_4 + 2\\text{O}_2 \\rightarrow \\text{CO}_2 + 2\\text{H}_2\\text{O} \\]\n\nThis equation is balanced in terms of the number of atoms of each element on both sides of the equation. However, the student's representation of water as \\( \\text{H}_2\\text{O} \\) is correct, but the notation for water should be \\( \\text{H}_2\\text{O} \\) instead of \\( \\text{H}_2\\text{O} \\). The correct notation for water is \\( \\text{H}_2\\text{O} \\), which is the standard chemical formula for water.\n\nSo, the correct balanced equation should be:\n\n\\[ \\text{CH}_4 + 2\\text{O}_2 \\rightarrow \\text{CO}_2 + 2\\text{H}_2\\text{O} \\]\n\nThe student's work is essentially correct, but the notation for water should be \\( \\text{H}_2\\text{O} \\) instead of \\( \\text{H}_2\\text{O} \\).",
+        "latency_sec": 2.4,
+        "tokens_per_sec": 152.5,
+        "completion_tokens": 335,
+        "prompt_tokens": 381
+      },
+      "prompt_b": {
+        "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: CH4 + 2O2 -> CO2 + 2H2O\n- Line 2: Atom count: 1 C, 4 H, and 2 O on both sides\n- Line 3: Reaction is balanced.\n\nStep 2: Evaluate each line for domain accuracy, factual validity, and logical consistency.\n- Line 1: The equation is not balanced. The correct balanced equation for the combustion of methane is CH4 + 2O2 -> CO2 + 2H2O. The student has correctly written the equation, but it is not balanced.\n- Line 2: The atom count is correct for the balanced equation: 1 C, 4 H, and 4 O on both sides.\n- Line 3: The reaction is not balanced as stated in Line 1.\n\nSTATUS: INCORRECT\nLINE_ERROR: 1\nExplanation: The student correctly wrote the equation for the combustion of methane but did not balance it. The equation should be CH4 + 2O2 -> CO2 + 2H2O.",
+        "latency_sec": 1.66,
+        "tokens_per_sec": 152.6,
+        "completion_tokens": 241,
+        "prompt_tokens": 491
+      }
+    },
+    {
+      "sample": {
+        "subject": "science",
+        "id": "science_sample3",
+        "name": "Science Sample 3: Plant Biomass Source Misconception",
+        "filename": "science_sample3_misconception.png",
+        "header": "Explain where a tree's dry mass comes from:",
+        "lines": [
+          "Line 1: Trees absorb water and soil through roots.",
+          "Line 2: Most of a tree's solid wood mass comes from",
+          "Line 3: soil minerals turning directly into wood."
+        ],
+        "expected_status": "INCORRECT",
+        "expected_line_error": 2,
+        "ground_truth_note": "Photosynthesis biomass misconception: Most plant dry biomass comes from atmospheric carbon dioxide (CO2) fixed during photosynthesis, not from soil."
+      },
+      "prompt_a": {
+        "response": "The student's handwritten work contains a logical error. Here is the explanation:\n\nLine 1: \"Trees absorb water and soil through roots.\"\nThis statement is correct. Trees absorb water and nutrients from the soil through their roots.\n\nLine 2: \"Most of a tree's solid wood mass comes from\"\nThis statement is misleading. While trees do absorb water and nutrients from the soil, the majority of a tree's solid wood mass does not come directly from soil minerals turning into wood. Instead, the wood mass is primarily composed of carbon dioxide absorbed from the atmosphere through photosynthesis, combined with water and minerals from the soil.\n\nLine 3: \"soil minerals turning directly into wood.\"\nThis statement is incorrect. Soil minerals do not turn directly into wood. The minerals provide essential nutrients, but the wood itself is primarily composed of carbon dioxide and water, with the minerals serving as a source of nutrients for the tree's growth.\n\nTo correct the student's work, it should be revised as follows:\n\nLine 1: \"Trees absorb water and nutrients from the soil through their roots.\"\nLine 2: \"Most of a tree's solid wood mass comes from\"\nLine 3: \"carbon dioxide absorbed from the atmosphere through photosynthesis, combined with water and minerals from the soil.\"\n\nThis revision accurately reflects the process by which trees form their solid wood mass.",
+        "latency_sec": 1.99,
+        "tokens_per_sec": 152.7,
+        "completion_tokens": 273,
+        "prompt_tokens": 381
+      },
+      "prompt_b": {
+        "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: Trees absorb water and soil through roots.\n- Line 2: Most of a tree's solid wood mass comes from\n- Line 3: soil minerals turning directly into wood.\n\nStep 2: Evaluate each line for domain accuracy, factual validity, and logical consistency.\n- Line 1: This statement is factually correct. Trees absorb water and nutrients through their roots.\n- Line 2: This statement is factually correct. The majority of a tree's solid wood mass does come from water and nutrients absorbed through the roots.\n- Line 3: This statement is factually incorrect. Soil minerals do not turn directly into wood. Instead, trees use the absorbed water and nutrients to synthesize wood through a process involving photosynthesis and the breakdown of carbon dioxide and water into glucose, which is then used to build the tree's structure.\n\nSTATUS: INCORRECT\nLINE_ERROR: 3\nMisconception: The student incorrectly states that soil minerals turn directly into wood. In reality, trees use the absorbed water and nutrients to synthesize wood through a process involving photosynthesis and the breakdown of carbon dioxide and water into glucose, which is then used to build the tree's structure.",
+        "latency_sec": 1.77,
+        "tokens_per_sec": 153.1,
+        "completion_tokens": 260,
+        "prompt_tokens": 491
+      }
+    },
+    {
+      "sample": {
+        "subject": "humanities",
+        "id": "humanities_sample1",
+        "name": "Humanities Sample 1: Cohesive Claim-Evidence-Reasoning (History)",
+        "filename": "humanities_sample1_correct.png",
+        "header": "Short Argument (1833 Factory Act):",
+        "lines": [
+          "Line 1: Claim: The 1833 Factory Act restricted child labor.",
+          "Line 2: Evidence: It banned textile work under age 9.",
+          "Line 3: Reasoning: Paid inspectors enforced the age limit."
+        ],
+        "expected_status": "CORRECT",
+        "expected_line_error": null,
+        "ground_truth_note": "Historically accurate claim supported by specific statutory evidence and logical reasoning."
+      },
+      "prompt_a": {
+        "response": "The student's handwritten work appears to be a structured argument about the 1833 Factory Act, which aimed to restrict child labor. The structure is as follows:\n\n1. **Claim**: The 1833 Factory Act restricted child labor.\n2. **Evidence**: It banned textile work under age 9.\n3. **Reasoning**: Paid inspectors enforced the age limit.\n\nThere is no apparent error or flaw in the structure of the argument itself. However, the student might want to consider the following points for clarity and completeness:\n\n- **Clarity of Evidence**: The evidence provided (banning textile work under age 9) is clear and directly supports the claim. However, it might be beneficial to include the specific age limit (9 years) for clarity.\n- **Reasoning**: The reasoning provided (paid inspectors enforced the age limit) is also clear and supports the evidence. However, it might be helpful to specify that the inspectors were responsible for enforcing the age limit to ensure the effectiveness of the ban.\n\nHere is a revised version for clarity:\n\n1. **Claim**: The 1833 Factory Act restricted child labor.\n2. **Evidence**: It banned textile work under age 9.\n3. **Reasoning**: Paid inspectors enforced the age limit (9 years).\n\nThis revision ensures that the specific age limit is mentioned, which can help in understanding the scope of the restriction more clearly.",
+        "latency_sec": 2.08,
+        "tokens_per_sec": 152.2,
+        "completion_tokens": 286,
+        "prompt_tokens": 381
+      },
+      "prompt_b": {
+        "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: Claim: The 1833 Factory Act restricted child labor.\n- Line 2: Evidence: It banned textile work under age 9.\n- Line 3: Reasoning: Paid inspectors enforced the age limit.\n\nStep 2: Evaluate each line for domain accuracy, factual validity, and logical consistency.\n- Line 1: Claim: The 1833 Factory Act restricted child labor.\n  - This statement is accurate. The 1833 Factory Act did indeed restrict child labor.\n- Line 2: Evidence: It banned textile work under age 9.\n  - This statement is accurate. The 1833 Factory Act did ban textile work for children under the age of 9.\n- Line 3: Reasoning: Paid inspectors enforced the age limit.\n  - This statement is accurate. The 1833 Factory Act did employ paid inspectors to enforce the age limits.\n\nSince all lines are accurate and logically sound, the output is:\n\nSTATUS: CORRECT\nLINE_ERROR: NONE",
+        "latency_sec": 1.57,
+        "tokens_per_sec": 152.9,
+        "completion_tokens": 230,
+        "prompt_tokens": 491
+      }
+    },
+    {
+      "sample": {
+        "subject": "humanities",
+        "id": "humanities_sample2",
+        "name": "Humanities Sample 2: Claim-Evidence Contradiction (1920s Economy)",
+        "filename": "humanities_sample2_error.png",
+        "header": "Argument Analysis (1920s US Agriculture):",
+        "lines": [
+          "Line 1: Claim: 1920s economic boom helped US farmers.",
+          "Line 2: Evidence: Crop prices fell 40% after WWI.",
+          "Line 3: Reasoning: Steep price drops made farmers rich."
+        ],
+        "expected_status": "INCORRECT",
+        "expected_line_error": 3,
+        "ground_truth_note": "Logical contradiction between evidence and reasoning/claim: A 40% drop in crop prices caused severe rural debt and farm foreclosures, not wealth."
+      },
+      "prompt_a": {
+        "response": "The student's argument analysis contains a logical error in Line 3. Here's the breakdown:\n\n- **Line 1**: The claim is that the 1920s economic boom helped US farmers.\n- **Line 2**: The evidence provided is that crop prices fell 40% after World War I.\n- **Line 3**: The reasoning is that steep price drops made farmers rich.\n\nThe error in Line 3 is the incorrect conclusion drawn from the evidence. A 40% drop in crop prices does not necessarily mean that farmers became rich. In fact, a significant drop in crop prices typically indicates a decrease in the income for farmers, as they are selling their produce for less money. Therefore, the correct conclusion should be that the steep price drops likely led to a decrease in the income for farmers, not an increase.\n\nA more accurate argument would be:\n\n- **Line 1**: The 1920s economic boom helped US farmers.\n- **Line 2**: Evidence: Crop prices fell 40% after World War I.\n- **Line 3**: Reasoning: Steep price drops likely led to a decrease in the income for farmers.\n\nThis revised argument correctly interprets the evidence and maintains logical consistency.",
+        "latency_sec": 1.88,
+        "tokens_per_sec": 152.4,
+        "completion_tokens": 255,
+        "prompt_tokens": 381
+      },
+      "prompt_b": {
+        "response": "Step 1: Transcription:\nLine 1: Claim: 1920s economic boom helped US farmers.\nLine 2: Evidence: Crop prices fell 40% after WWI.\nLine 3: Reasoning: Steep price drops made farmers rich.\n\nStep 2: Evaluation:\n- Line 1: The claim that the 1920s economic boom helped US farmers is not necessarily accurate. While the 1920s did see economic growth, the agricultural sector often experienced challenges due to overproduction and market instability.\n- Line 2: The evidence provided is factually correct. Crop prices did indeed fall significantly after World War I, which was a period of significant agricultural overproduction.\n- Line 3: The reasoning that steep price drops made farmers rich is incorrect. Steep price drops typically lead to financial losses for farmers, as they sell their crops at lower prices than they paid for inputs like seeds and labor.\n\nSTATUS: INCORRECT\nLINE_ERROR: 3\nExplanation: The reasoning in Line 3 is incorrect. Steep price drops do not make farmers rich; they typically result in financial losses.",
+        "latency_sec": 1.62,
+        "tokens_per_sec": 152.8,
+        "completion_tokens": 237,
+        "prompt_tokens": 491
+      }
+    },
+    {
+      "sample": {
+        "subject": "humanities",
+        "id": "humanities_sample3",
+        "name": "Humanities Sample 3: Primary Source Bias Misconception",
+        "filename": "humanities_sample3_misconception.png",
+        "header": "Source Evaluation (1914 Wartime Newspaper):",
+        "lines": [
+          "Line 1: Source: Front-page editorial from August 1914.",
+          "Line 2: Evaluation: Because this is a primary source",
+          "Line 3: written during WWI, it is 100% unbiased fact."
+        ],
+        "expected_status": "INCORRECT",
+        "expected_line_error": 2,
+        "ground_truth_note": "Primary source misconception: Equating primary/contemporaneous sources with unbiased objective fact, ignoring wartime censorship and authorial perspective."
+      },
+      "prompt_a": {
+        "response": "The student's handwritten work contains an error in the evaluation of the source. Here is the evaluation:\n\n- Line 1: Source: Front-page editorial from August 1914.\n- Line 2: Evaluation: Because this is a primary source\n- Line 3: written during WWI, it is 100% unbiased fact.\n\nThe error is in Line 3: \"written during WWI, it is 100% unbiased fact.\"\n\n### Explanation of the Error:\n1. **Primary Source**: The student correctly identifies the source as a primary source, which is a correct evaluation.\n2. **Unbiased Fact**: However, the statement \"it is 100% unbiased fact\" is incorrect. Primary sources, even those written during a war, are not inherently unbiased. They are written by individuals who have their own perspectives, biases, and agendas. Therefore, it is not accurate to claim that a primary source is 100% unbiased.\n\n### Corrected Evaluation:\nThe evaluation should reflect the limitations of primary sources. Here is a corrected version:\n\n- Line 1: Source: Front-page editorial from August 1914.\n- Line 2: Evaluation: Because this is a primary source\n- Line 3: written during WWI, it reflects the perspective of the author and may contain biases.\n\nThis correction acknowledges the limitations of primary sources and provides a more accurate evaluation of the source.",
+        "latency_sec": 2.13,
+        "tokens_per_sec": 152.8,
+        "completion_tokens": 295,
+        "prompt_tokens": 381
+      },
+      "prompt_b": {
+        "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: Source: Front-page editorial from August 1914.\n- Line 2: Evaluation: Because this is a primary source.\n- Line 3: written during WWI, it is 100% unbiased fact.\n\nStep 2: Evaluate each line for domain accuracy, factual validity, and logical consistency.\n- Line 1: The source is correctly identified as a front-page editorial from August 1914.\n- Line 2: The evaluation is partially correct. While the source is a primary source, it is not necessarily unbiased. Editors and newspapers during wartime often had biases and were influenced by the political climate of the time.\n- Line 3: The statement that the source is \"100% unbiased fact\" is incorrect. As mentioned in Line 2, primary sources can have biases and are not always completely unbiased.\n\nSTATUS: INCORRECT\nLINE_ERROR: 2\nLINE_ERROR: 3\n\nExplanation: The student correctly identified the source as a primary source but incorrectly assumed it was unbiased. Primary sources can have biases and are not always completely unbiased.",
+        "latency_sec": 1.66,
+        "tokens_per_sec": 152.5,
+        "completion_tokens": 243,
+        "prompt_tokens": 491
+      }
+    },
+    {
+      "sample": {
+        "subject": "economics",
+        "id": "economics_sample1",
+        "name": "Economics Sample 1: Correct Supply Shock Analysis",
+        "filename": "economics_sample1_correct.png",
+        "header": "Coffee Market (Severe Frost in Brazil):",
+        "lines": [
+          "Line 1: Frost destroys 30% of coffee bean harvest.",
+          "Line 2: Supply curve shifts left (S1 -> S2).",
+          "Line 3: Equilibrium price rises, quantity falls."
+        ],
+        "expected_status": "CORRECT",
+        "expected_line_error": null,
+        "ground_truth_note": "Accurate comparative statics: negative supply shock shifts supply left, raising equilibrium price and lowering equilibrium quantity."
+      },
+      "prompt_a": {
+        "response": "The student's handwritten work appears to be a correct analysis of the impact of a severe frost in Brazil on the coffee market. Here's a breakdown of the points:\n\n1. **Frost destroys 30% of coffee bean harvest.**\n   - This statement is accurate. A severe frost can significantly reduce the coffee bean harvest, which is a key factor in the supply of coffee.\n\n2. **Supply curve shifts left (S1 -> S2).**\n   - This statement is also correct. When the supply of a good decreases, the supply curve shifts to the left. In this case, the decrease in the coffee bean harvest shifts the supply curve from S1 to S2.\n\n3. **Equilibrium price rises, quantity falls.**\n   - This statement is correct as well. When the supply curve shifts left, the equilibrium price increases because the supply of coffee decreases, and the equilibrium quantity decreases because the supply of coffee is now lower.\n\nThere are no apparent errors or flaws in the student's work. The analysis correctly identifies the effect of the frost on the supply of coffee, the shift in the supply curve, and the resulting changes in the equilibrium price and quantity.",
+        "latency_sec": 1.77,
+        "tokens_per_sec": 152.7,
+        "completion_tokens": 239,
+        "prompt_tokens": 381
+      },
+      "prompt_b": {
+        "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: Frost destroys 30% of coffee bean harvest.\n- Line 2: Supply curve shifts left (S1 -> S2).\n- Line 3: Equilibrium price rises, quantity falls.\n\nStep 2: Evaluate each line for domain accuracy, factual validity, and logical consistency.\n- Line 1: This statement is factual and logically consistent. A severe frost can indeed destroy a portion of the coffee bean harvest.\n- Line 2: This statement is also factual and logically consistent. A decrease in the supply of coffee beans (due to the frost) would shift the supply curve to the left.\n- Line 3: This statement is factual and logically consistent. When the supply curve shifts to the left, the equilibrium price increases and the equilibrium quantity decreases.\n\nSTATUS: CORRECT\nLINE_ERROR: NONE",
+        "latency_sec": 1.28,
+        "tokens_per_sec": 152.0,
+        "completion_tokens": 184,
+        "prompt_tokens": 491
+      }
+    },
+    {
+      "sample": {
+        "subject": "economics",
+        "id": "economics_sample2",
+        "name": "Economics Sample 2: Equilibrium Direction Error",
+        "filename": "economics_sample2_error.png",
+        "header": "Laptop Market (Consumer Income Rises):",
+        "lines": [
+          "Line 1: Higher income increases demand for laptops.",
+          "Line 2: Demand curve shifts right (D1 -> D2).",
+          "Line 3: Equilibrium price rises and quantity falls."
+        ],
+        "expected_status": "INCORRECT",
+        "expected_line_error": 3,
+        "ground_truth_note": "Line 3 equilibrium error: When demand shifts right (with upward-sloping supply), equilibrium price rises AND equilibrium quantity rises (not falls)."
+      },
+      "prompt_a": {
+        "response": "The student's handwritten work contains a logical error in the third line of the statement. Here is the analysis:\n\n1. **Line 1:** \"Higher income increases demand for laptops.\"\n   - This statement is correct. As consumer income rises, the demand for laptops typically increases because consumers have more disposable income to spend on higher-end products.\n\n2. **Line 2:** \"Demand curve shifts right (D1 -> D2).\"\n   - This statement is also correct. When demand increases, the demand curve shifts to the right, from D1 to D2, indicating a higher quantity demanded at every price level.\n\n3. **Line 3:** \"Equilibrium price rises and quantity falls.\"\n   - This statement contains an error. When the demand curve shifts to the right (indicating an increase in demand), the equilibrium price typically rises, but the equilibrium quantity also rises. The equilibrium quantity increases because the higher demand at every price level leads to a greater quantity being demanded and supplied at the new equilibrium point.\n\nTherefore, the correct statement for Line 3 should be: \"Equilibrium price rises and quantity rises.\"\n\nThe correct sequence should be:\n- Line 1: Higher income increases demand for laptops.\n- Line 2: Demand curve shifts right (D1 -> D2).\n- Line 3: Equilibrium price rises and quantity rises.",
+        "latency_sec": 2.0,
+        "tokens_per_sec": 152.8,
+        "completion_tokens": 274,
+        "prompt_tokens": 381
+      },
+      "prompt_b": {
+        "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: Higher income increases demand for laptops.\n- Line 2: Demand curve shifts right (D1 -> D2).\n- Line 3: Equilibrium price rises and quantity falls.\n\nStep 2: Evaluate each line for domain accuracy, factual validity, and logical consistency.\n- Line 1: Higher income increases demand for laptops. **STATUS: CORRECT**. This is a correct statement in economics.\n- Line 2: Demand curve shifts right (D1 -> D2). **STATUS: CORRECT**. This is a correct representation of an increase in demand.\n- Line 3: Equilibrium price rises and quantity falls. **STATUS: INCORRECT**. This statement is incorrect. When demand increases, the equilibrium price typically rises, but the equilibrium quantity also rises. Therefore, the correct statement should be: \"Equilibrium price rises and quantity rises.\"\n\nFinal Evaluation:\n- **LINE_ERROR: 3**. The student's work indicates that the equilibrium quantity falls, which is incorrect. The equilibrium quantity should rise when demand increases.",
+        "latency_sec": 1.59,
+        "tokens_per_sec": 152.6,
+        "completion_tokens": 232,
+        "prompt_tokens": 491
+      }
+    },
+    {
+      "sample": {
+        "subject": "economics",
+        "id": "economics_sample3",
+        "name": "Economics Sample 3: Shift vs Movement Along Curve Misconception",
+        "filename": "economics_sample3_misconception.png",
+        "header": "Effect of a store raising shoe prices ($50 -> $70):",
+        "lines": [
+          "Line 1: The price of shoes rises from $50 to $70.",
+          "Line 2: This price increase causes the entire",
+          "Line 3: Demand curve for shoes to shift left."
+        ],
+        "expected_status": "INCORRECT",
+        "expected_line_error": 2,
+        "ground_truth_note": "Demand shift vs movement misconception: A change in the good's own price causes a movement along the existing demand curve (decrease in quantity demanded), not a shift of the demand curve."
+      },
+      "prompt_a": {
+        "response": "The student's handwritten work contains a logical error in the statement \"This price increase causes the entire Demand curve for shoes to shift left.\"\n\nHere's the explanation of the error:\n\n1. **Price Increase and Demand Curve Shift**: When the price of a good increases, the demand for that good typically decreases, but this is a movement along the demand curve, not a shift of the entire demand curve. A shift of the entire demand curve occurs when there is a change in a factor other than the price, such as a change in consumer income, preferences, or the prices of related goods.\n\n2. **Movement Along the Demand Curve**: The statement \"This price increase causes the entire Demand curve for shoes to shift left\" is incorrect because a price increase only causes a movement along the demand curve, not a shift of the entire curve. The demand curve shifts only when there is a change in a factor other than the price.\n\nTherefore, the correct statement should be: \"This price increase causes a movement along the demand curve for shoes.\"\n\nThe correct sequence should be:\n- Line 1: The price of shoes rises from $50 to $70.\n- Line 2: This price increase causes a movement along the demand curve for shoes.\n- Line 3: The demand for shoes decreases.",
+        "latency_sec": 1.92,
+        "tokens_per_sec": 152.3,
+        "completion_tokens": 262,
+        "prompt_tokens": 381
+      },
+      "prompt_b": {
+        "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: The price of shoes rises from $50 to $70.\n- Line 2: This price increase causes the entire\n- Line 3: Demand curve for shoes to shift left.\n\nStep 2: Evaluate each line for domain accuracy, factual validity, and logical consistency.\n- Line 1: This statement is accurate. The price of shoes indeed rises from $50 to $70.\n- Line 2: This statement is incomplete and lacks clarity. It should be completed to say: \"This price increase causes the entire demand curve for shoes to shift left.\"\n- Line 3: This statement is accurate. A price increase typically leads to a decrease in demand, which is represented by the demand curve shifting to the left.\n\nBased on the evaluation, the student's work contains a minor issue in Line 2, which is not completed. However, the overall concept is correct.\n\nSTATUS: CORRECT\nLINE_ERROR: 2",
+        "latency_sec": 1.46,
+        "tokens_per_sec": 152.8,
+        "completion_tokens": 212,
+        "prompt_tokens": 491
+      }
+    }
+  ],
+  "vector_benchmarks": [
+    {
+      "subject": "science",
+      "query": "Students who think trees get their mass from soil instead of carbon dioxide in the air",
+      "expected_id": "sci_plant_biomass",
+      "matched_id": "sci_plant_biomass",
+      "matched_title": "Photosynthesis Biomass Source Misconception (Soil vs Air CO2)",
+      "sample_ref": "science_sample3_misconception.png",
+      "top_cosine_sim": 0.589,
+      "runner_up_sim": 0.3448,
+      "margin": 0.2442,
+      "passed": true
+    },
+    {
+      "subject": "science",
+      "query": "Students who miscounted atoms when balancing a combustion reaction",
+      "expected_id": "sci_mass_conservation",
+      "matched_id": "sci_mass_conservation",
+      "matched_title": "Stoichiometry Atom Count / Conservation of Mass Error",
+      "sample_ref": "science_sample2_error.png",
+      "top_cosine_sim": 0.6973,
+      "runner_up_sim": 0.4735,
+      "margin": 0.2238,
+      "passed": true
+    },
+    {
+      "subject": "humanities",
+      "query": "Students who think primary sources from wartime are completely unbiased facts",
+      "expected_id": "hum_primary_source_bias",
+      "matched_id": "hum_primary_source_bias",
+      "matched_title": "Primary Source Neutrality Misconception",
+      "sample_ref": "humanities_sample3_misconception.png",
+      "top_cosine_sim": 0.5994,
+      "runner_up_sim": 0.4954,
+      "margin": 0.104,
+      "passed": true
+    },
+    {
+      "subject": "humanities",
+      "query": "Students whose cited evidence contradicts their main argument claim",
+      "expected_id": "hum_evidence_contradiction",
+      "matched_id": "hum_evidence_contradiction",
+      "matched_title": "Claim-Evidence Logical Contradiction",
+      "sample_ref": "humanities_sample2_error.png",
+      "top_cosine_sim": 0.7654,
+      "runner_up_sim": 0.6111,
+      "margin": 0.1543,
+      "passed": true
+    },
+    {
+      "subject": "economics",
+      "query": "Students who shifted the whole demand curve when only the item's own price changed",
+      "expected_id": "econ_shift_vs_movement",
+      "matched_id": "econ_shift_vs_movement",
+      "matched_title": "Shift of Demand Curve vs Movement Along Curve Misconception",
+      "sample_ref": "economics_sample3_misconception.png",
+      "top_cosine_sim": 0.7044,
+      "runner_up_sim": 0.6539,
+      "margin": 0.0506,
+      "passed": true
+    },
+    {
+      "subject": "economics",
+      "query": "Students who said equilibrium quantity falls when demand shifts right",
+      "expected_id": "econ_equilibrium_direction",
+      "matched_id": "econ_equilibrium_direction",
+      "matched_title": "Demand Shift Equilibrium Quantity Direction Error",
+      "sample_ref": "economics_sample2_error.png",
+      "top_cosine_sim": 0.7753,
+      "runner_up_sim": 0.6371,
+      "margin": 0.1382,
+      "passed": true
+    }
+  ]
+}

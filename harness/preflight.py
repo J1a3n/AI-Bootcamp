@@ -94,6 +94,14 @@ def check_env_template() -> bool:
         print("  [✓] Configuration: Local environment credentials file detected (.env.local)")
     return True
 
+def check_subject_track() -> dict:
+    from harness.subjects import get_subject_pack, list_subject_packs
+    pack = get_subject_pack()
+    all_ids = [p["id"] for p in list_subject_packs()]
+    print(f"  [✓] Active Subject Track: {pack['title']} ('{pack['id']}')")
+    print(f"      Available Subject Packs: {', '.join(all_ids)} (Switch via: python -m harness select <id>)")
+    return pack
+
 def run_preflight() -> bool:
     print_box_header("PRE-FLIGHT HARDWARE & INFRASTRUCTURE DOCTOR (CHECK 0)")
     p1 = check_python_environment()
@@ -101,6 +109,7 @@ def run_preflight() -> bool:
     p3 = check_python_dependencies()
     p4 = check_ollama_status()
     p5 = check_env_template()
+    p6 = check_subject_track()
     
     # Ensure src directory exists
     Path("src").mkdir(exist_ok=True)

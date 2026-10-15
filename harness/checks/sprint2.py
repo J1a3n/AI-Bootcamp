@@ -20,9 +20,14 @@ def print_banner(title: str):
 
 def check_slice_2_1() -> bool:
     print_banner("CHECKPOINT 2.1: DESK-TO-PROJECTOR FAST LANE")
+    from harness.subjects import get_subject_pack
+    pack = get_subject_pack()
     
-    # 1. Locate test image
-    sample_path = Path("harness/data/sample1_correct.png")
+    # 1. Locate test image from active subject pack
+    sample_rel = pack["samples"]["sample1_correct"]["path"]
+    sample_path = Path(sample_rel)
+    if not sample_path.exists():
+        sample_path = Path("harness/data/sample1_correct.png")
     if not sample_path.exists():
         sample_path = Path("sandbox/harness/data/sample1_correct.png")
     assert sample_path.exists(), f"Assertion Error: Test image {sample_path} not found!"
@@ -41,6 +46,7 @@ def check_slice_2_1() -> bool:
     assert res["render_latency_ms"] < 60.0, f"Expected <60ms latency, got {res['render_latency_ms']}ms"
     assert res.get("memory_cleaned") is True, "Buffer memory cleanup failed: memory leak risk"
 
+    print(f"  [✓] Subject Track Active: {pack['title']}")
     print(f"  [✓] Bifurcated Views: Mobile Controller & Projector Canvas mounted")
     print(f"  [✓] Client-Side Canvas Filter: Contrast boosted in {res['render_latency_ms']:.1f}ms (on-device)")
     print(f"  [✓] Processed Image Buffer: {res['original_size_bytes']} bytes -> {res['processed_size_bytes']} bytes")
@@ -57,6 +63,8 @@ def check_slice_2_1() -> bool:
 
 def check_slice_2_2() -> bool:
     print_banner("CHECKPOINT 2.2: CLOUD PERSISTENCE & STORAGE")
+    from harness.subjects import get_subject_pack
+    pack = get_subject_pack()
     
     test_db = Path("test_submissions.db")
     test_storage = Path("test_storage_bucket")
@@ -68,14 +76,19 @@ def check_slice_2_2() -> bool:
         print(f"  [X] Failed to import PersistenceManager: {e}")
         return False
 
-    sample_path = Path("harness/data/sample1_correct.png")
+    sample_rel = pack["samples"]["sample1_correct"]["path"]
+    sample_path = Path(sample_rel)
+    if not sample_path.exists():
+        sample_path = Path("harness/data/sample1_correct.png")
     if not sample_path.exists():
         sample_path = Path("sandbox/harness/data/sample1_correct.png")
     raw_bytes = sample_path.read_bytes()
 
     # 1. Real Upload to S3 Shelf & Database Filing Cabinet
     sub_id = "sub_real_test_9182"
-    upload_res = pm.upload_submission(sub_id, "Maya_Period_3", raw_bytes, "Algebra I - Multi-step Equations")
+    student_alias = pack["sample_student_alias"]
+    topic_name = pack["sample_topic"]
+    upload_res = pm.upload_submission(sub_id, student_alias, raw_bytes, topic_name)
     
     assert upload_res["status"] == "persisted", "Upload did not return persisted status"
     assert Path(upload_res["image_path"]).exists(), f"Image binary not found on shelf: {upload_res['image_path']}"
@@ -102,7 +115,7 @@ def check_slice_2_2() -> bool:
     print("  [✓] Storage Bucket Created: 'student-notebooks' (S3 active)")
     print("  [✓] Postgres Table Initialized: 'submissions' schema verified")
     print(f"  [✓] Photo Album Write: {len(raw_bytes)} bytes saved to cloud shelf ({upload_res['image_path']})")
-    print(f"  [✓] Filing Cabinet Write: Index card inserted (ID: {sub_id})")
+    print(f"  [✓] Filing Cabinet Write: Index card inserted (ID: {sub_id}, Topic: {topic_name})")
 
     # 4. Simulate Page Refresh & Restoration
     start_t = time.perf_counter()
@@ -110,8 +123,8 @@ def check_slice_2_2() -> bool:
     restore_latency = time.perf_counter() - start_t
 
     assert restored is not None, "Failed to restore record after refresh"
-    assert restored["student_alias"] == "Maya_Period_3", "Restored record alias mismatch"
-    assert restored["topic"] == "Algebra I - Multi-step Equations", "Restored record topic mismatch"
+    assert restored["student_alias"] == student_alias, "Restored record alias mismatch"
+    assert restored["topic"] == topic_name, "Restored record topic mismatch"
 
     print("  [✓] Simulation: Full browser refresh triggered on projector")
     print(f"  [✓] Projector State Restored: Fetched from DB in {restore_latency:.4f}s")

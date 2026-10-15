@@ -1,7 +1,7 @@
 # Teacher's Field Notes — Sprint 4: Grounding & The Analytical Assistant
 
-## Module 3.2: High-Dimensional Vector Spaces & Math Concepts
-* **Classroom Reflection:** *Why does standard database search (SQL LIKE '%-%') fail to find all student sign errors? How does mapping math problems into coordinate vectors (Cosine Distance in R^768) allow a computer to understand mathematical intent and failure modes?*
+## Module 3.2: High-Dimensional Concept Maps & Student Misconceptions
+* **Classroom Reflection:** *Why does standard keyword search (like Ctrl+F or SQL LIKE) fail to find all students who share the same underlying misconception (whether a sign error in Math, a conservation-of-mass mistake in Science, a primary-source bias assumption in History, or a curve-shift mix-up in Economics)? How does mapping student work across a 768-Slider Concept Profile (`pgvector` in R^768) allow a computer to group students by how they are thinking rather than the exact words they wrote?*
 * **My Field Observations & Insights:**
   > *(Record your thoughts and reflections here)*
 

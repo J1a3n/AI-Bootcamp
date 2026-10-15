@@ -1,0 +1,74 @@
+[
+  {
+    "subject": "science",
+    "filename": "science_sample1_correct.png",
+    "expected_status": "CORRECT",
+    "expected_line": "NONE",
+    "latency_sec": 1.87,
+    "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: C6H1206 + 602 -> 6CO2 + 6H2O + ATP\n- Line 2: Reactants: 6 C, 12 H, 18 O\n- Line 3: Products: 6 C, 12 H, 18 O (Exothermic)\n\nStep 2: Verify scientific accuracy across the lines:\n- Check exact atom counts on Reactants vs Products:\n  - Reactants: 6 C, 12 H, 18 O\n  - Products: 6 C, 12 H, 18 O (Correct atom counts)\n- Check biological/chemical mechanism accuracy:\n  - The equation is balanced and correctly represents the process of cellular respiration.\n  - The products include ATP, which is produced during cellular respiration.\n- Null Hypothesis: If all lines are scientifically accurate and consistent, output 'STATUS: CORRECT' and 'LINE_ERROR: NONE'.\n- Alternative Hypothesis: If any line states an incorrect atom count or scientific misconception, output 'STATUS: INCORRECT' and 'LINE_ERROR: <line_number>' for the first erroneous line.\n\nSTATUS: CORRECT\nLINE_ERROR: NONE"
+  },
+  {
+    "subject": "science",
+    "filename": "science_sample2_error.png",
+    "expected_status": "INCORRECT",
+    "expected_line": "2",
+    "latency_sec": 2.2,
+    "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: 12g Carbon reacts completely with 32g Oxygen.\n- Line 2: Total reactant mass in sealed flask = 44g.\n- Line 3: Since CO2 is a gas, final mass in flask = 0g.\n\nStep 2: Verify scientific accuracy across the lines:\n- Check exact atom counts on Reactants vs Products: \n  - Reactants: 12g C (12 atoms) + 32g O (32 atoms) = 44 atoms.\n  - Products: CO2 (1 C, 2 O) = 3 atoms.\n  - The total atom count on the reactants side is 44 atoms, and on the product side, it is 3 atoms. This indicates a discrepancy in the atom count.\n- Check biological/chemical mechanism accuracy: The reaction described is a combustion reaction, not a photosynthesis reaction. Photosynthesis involves CO2 from the atmosphere, not soil minerals.\n- Null Hypothesis: If all lines are scientifically accurate and consistent, output 'STATUS: CORRECT' and 'LINE_ERROR: NONE'.\n- Alternative Hypothesis: If any line states an incorrect atom count or scientific misconception, output 'STATUS: INCORRECT' and 'LINE_ERROR: <line_number>' for the first erroneous line.\n\nSTATUS: INCORRECT\nLINE_ERROR: 1"
+  },
+  {
+    "subject": "science",
+    "filename": "science_sample3_misconception.png",
+    "expected_status": "INCORRECT",
+    "expected_line": "2",
+    "latency_sec": 0.67,
+    "response": "STATUS: INCORRECT\nLINE_ERROR: 3\n\nExplanation:\n- Line 1 is correct: Trees absorb water and soil through roots.\n- Line 2 is correct: Most of a tree's solid wood mass comes from atmospheric carbon dioxide (CO2) via photosynthesis.\n- Line 3 is incorrect: Soil minerals do not turn directly into wood. The process involves the absorption of water and minerals, followed by the synthesis of organic compounds within the tree, primarily through photosynthesis."
+  },
+  {
+    "subject": "humanities",
+    "filename": "humanities_sample1_correct.png",
+    "expected_status": "CORRECT",
+    "expected_line": "NONE",
+    "latency_sec": 1.29,
+    "response": "Step 1: Transcription:\n- Line 1: Claim: The 1833 Factory Act restricted child labor.\n- Line 2: Evidence: It banned textile work under age 9.\n- Line 3: Reasoning: Paid inspectors enforced the age limit.\n\nStep 2: Verification:\n- **Claim**: The 1833 Factory Act restricted child labor. This is historically accurate. The Act did indeed restrict child labor in factories.\n- **Evidence**: It banned textile work under age 9. This is also historically accurate. The 1833 Factory Act did set a minimum age of 9 for children working in textile factories.\n- **Reasoning**: Paid inspectors enforced the age limit. This is historically accurate. The Act did employ inspectors to enforce the age limits.\n\nSince the Claim, Evidence, and Reasoning are all historically accurate and logically cohesive, the output is:\n\nSTATUS: CORRECT\nLINE_ERROR: NONE"
+  },
+  {
+    "subject": "humanities",
+    "filename": "humanities_sample2_error.png",
+    "expected_status": "INCORRECT",
+    "expected_line": "3",
+    "latency_sec": 1.68,
+    "response": "Step 1: Transcription:\nLine 1: Claim: 1920s economic boom helped US farmers.\nLine 2: Evidence: Crop prices fell 40% after WWI.\nLine 3: Reasoning: Steep price drops made farmers rich.\n\nStep 2: Verification:\n- **Line 1**: The claim that the 1920s economic boom helped US farmers is a plausible statement, but it requires more evidence to be fully supported. The economic boom is often associated with the stock market and industrial growth, not necessarily agricultural prosperity.\n- **Line 2**: The evidence that crop prices fell 40% after WWI is historically accurate. After World War I, the global demand for agricultural products decreased, leading to a significant drop in prices.\n- **Line 3**: The reasoning that steep price drops made farmers rich is incorrect. Steep price drops typically lead to financial losses for farmers, as they sell their crops at lower prices than they paid for inputs and other costs. This would not make farmers rich but rather financially strained.\n\n**Conclusion**: The evidence and reasoning do not logically follow from the evidence provided. Therefore, the argument is flawed.\n\nSTATUS: INCORRECT\nLINE_ERROR: 3"
+  },
+  {
+    "subject": "humanities",
+    "filename": "humanities_sample3_misconception.png",
+    "expected_status": "INCORRECT",
+    "expected_line": "2",
+    "latency_sec": 1.36,
+    "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Line 1: Source: Front-page editorial from August 1914.\n- Line 2: Evaluation: Because this is a primary source\n- Line 3: written during WWI, it is 100% unbiased fact.\n\nStep 2: Verify historical/textual argumentation across the lines:\n- Line 1: The source is correctly identified as a front-page editorial from August 1914, which is a primary source.\n- Line 2: The evaluation states that because it is a primary source, it is unbiased. This is a misconception. Primary sources can be biased, and the evaluation should consider the context and authorial bias.\n- Line 3: The statement that it is 100% unbiased fact is incorrect. Primary sources can be biased, and the evaluation should consider the context and authorial bias.\n\nSTATUS: INCORRECT\nLINE_ERROR: 2, 3"
+  },
+  {
+    "subject": "economics",
+    "filename": "economics_sample1_correct.png",
+    "expected_status": "CORRECT",
+    "expected_line": "NONE",
+    "latency_sec": 1.29,
+    "response": "Step 1: Transcribe the handwritten student work line-by-line accurately.\n- Coffee Market (Severe Frost in Brazil):\n- Line 1: Frost destroys 30% of coffee bean harvest.\n- Line 2: Supply curve shifts left (S1 -> S2).\n- Line 3: Equilibrium price rises, quantity falls.\n\nStep 2: Verify microeconomic Supply & Demand principles across the lines:\n- Line 1: This statement is accurate. A severe frost destroying 30% of the coffee bean harvest would indeed reduce the supply of coffee beans.\n- Line 2: This statement is also accurate. A reduction in supply would shift the supply curve to the left, from S1 to S2.\n- Line 3: This statement is accurate. When the supply curve shifts left, the equilibrium price rises and the equilibrium quantity falls.\n\nSince all lines are economically accurate, the output is:\n\nSTATUS: CORRECT\nLINE_ERROR: NONE"
+  },
+  {
+    "subject": "economics",
+    "filename": "economics_sample2_error.png",
+    "expected_status": "INCORRECT",
+    "expected_line": "3",
+    "latency_sec": 0.64,
+    "response": "STATUS: INCORRECT\nLINE_ERROR: 3\n\nExplanation:\n- Line 1 is correct: Higher income increases demand for laptops.\n- Line 2 is correct: The demand curve shifts right (D1 -> D2) when consumer income rises.\n- Line 3 is incorrect: An increase in demand (rightward shift of the demand curve) leads to an increase in both equilibrium price and equilibrium quantity, not a rise in price and a fall in quantity."
+  },
+  {
+    "subject": "economics",
+    "filename": "economics_sample3_misconception.png",
+    "expected_status": "INCORRECT",
+    "expected_line": "2",
+    "latency_sec": 0.09,
+    "response": "STATUS: INCORRECT\nLINE_ERROR: 3"
+  }
+]

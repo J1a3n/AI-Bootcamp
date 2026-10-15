@@ -8,7 +8,7 @@
 ---
 
 ## Module 1.2: Speed Telemetry & Classroom Dead-Time
-* **Classroom Reflection:** *In a 45-minute math class with 30 students, every second of teacher dead-time counts. When we look at AI performance, we measure "Tokens per Second" (~150 tok/s means a full algebra solution in ~1 second). Why does having live speed telemetry on your screen matter when deciding whether a tool is actually practical for daily teaching?*
+* **Classroom Reflection:** *In a 45-minute class with 30 students, every second of teacher dead-time counts. When we look at AI performance, we measure "Tokens per Second" (~150 tok/s means a full student solution, lab check, or paragraph analysis in ~1 second). Why does having live speed telemetry on your screen matter when deciding whether a tool is actually practical for daily teaching?*
 * **My Field Observations & Insights:**
   > *(Record your thoughts and reflections here)*
 

@@ -50,10 +50,14 @@ def check_slice_1_1() -> bool:
     print(f"  [✓] Inference Engine Active: Listening on {active_url}")
     print(f"  [✓] Model Weights Verified: {Path(active_model).name if active_model else 'Silicon GPU Active'}")
 
-    # 2. Dispatch real algebra prompt and measure real throughput
-    equation = "Solve 3(x - 4) = 15"
+    from harness.subjects import get_subject_pack
+    pack = get_subject_pack()
+
+    # 2. Dispatch real domain prompt and measure real throughput
+    prompt_text = pack["ignition_prompt"]
+    expected_token = pack["ignition_expected_token"].lower()
     payload = json.dumps({
-        "messages": [{"role": "user", "content": f"{equation}. Show steps and final value."}],
+        "messages": [{"role": "user", "content": f"{prompt_text} Show steps and final answer."}],
         "temperature": 0.2,
         "max_tokens": 384
     }).encode("utf-8")
@@ -80,11 +84,12 @@ def check_slice_1_1() -> bool:
     content = resp_data.get("choices", [{}])[0].get("message", {}).get("content", "")
 
     assert comp_tokens > 0, "Assertion Error: 0 completion tokens returned by engine."
-    assert "9" in content, f"Assertion Error: Expected answer 9 not found in response: {content[:100]}"
+    assert expected_token in content.lower(), f"Assertion Error: Expected '{expected_token}' not found in response: {content[:100]}"
     
-    print(f"  [✓] Algebra Prompt Dispatched: '{equation}'")
+    print(f"  [✓] Subject Track Active: {pack['title']}")
+    print(f"  [✓] Domain Prompt Dispatched: '{prompt_text}'")
     print(f"  [✓] Silicon Generation Throughput: {tok_s:.1f} tok/s (Elapsed: {elapsed:.2f}s)")
-    print(f"  [✓] Mathematical Result Verified: {content[:80].strip()}...")
+    print(f"  [✓] Domain Result Verified: {content[:80].strip()}...")
     
     print("-" * 60)
     print("  STATUS: ALL CHECKS PASSED (Slice 1.1 Complete)")
@@ -94,6 +99,8 @@ def check_slice_1_1() -> bool:
 
 def check_slice_1_2() -> bool:
     print_banner("CHECKPOINT 1.2: WEB PLAYGROUND & LIVE TELEMETRY")
+    from harness.subjects import get_subject_pack
+    pack = get_subject_pack()
     
     # Dynamic import and execution of Web Telemetry Bridge
     try:
@@ -104,13 +111,13 @@ def check_slice_1_2() -> bool:
         return False
 
     # Test Local Model Telemetry
-    local_metrics = bridge.query_speedometer("3(x - 4) = 15", target_model="local_qwen_0_5b")
+    local_metrics = bridge.query_speedometer(pack["ignition_prompt"], target_model="local_qwen_0_5b")
     assert "generation_tok_s" in local_metrics, "Missing generation_tok_s in telemetry"
     assert local_metrics["generation_tok_s"] > 50, f"Expected >50 tok/s, got {local_metrics['generation_tok_s']}"
     assert local_metrics["latency_seconds"] > 0, "Invalid latency value"
     
     # Test Cloud Reference Standard Telemetry
-    cloud_metrics = bridge.query_speedometer("3(x - 4) = 15", target_model="cloud_frontier")
+    cloud_metrics = bridge.query_speedometer(pack["ignition_prompt"], target_model="cloud_frontier")
     assert "Cloud" in cloud_metrics["model"], "Cloud model reference mismatch"
     assert cloud_metrics["latency_seconds"] > 0, "Cloud latency invalid"
 

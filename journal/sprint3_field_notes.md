@@ -1,7 +1,7 @@
 # Teacher's Field Notes — Sprint 3: The Vision Worker & Decoupling
 
 ## Module 2.4: The "Error Hunter" Trap (AI Bias)
-* **Classroom Reflection:** *Why does asking an AI "Find the error in this working" cause it to hallucinate mistakes even on 100% correct algebra? How does a balanced null-hypothesis prompt ("If all lines are valid, state STATUS: CORRECT") restore mathematical integrity?*
+* **Classroom Reflection:** *Why does asking an AI "Find the error in this student's work" cause it to hallucinate mistakes even on 100% sound equations, balanced chemical reactions, or well-reasoned historical arguments? How does a domain-anchored balanced null-hypothesis prompt ("If all lines are accurate and logically sound, state STATUS: CORRECT") restore instructional integrity?*
 * **My Field Observations & Insights:**
   > *(Record your thoughts and reflections here)*
 

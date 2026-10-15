@@ -19,6 +19,8 @@ def print_banner(title: str):
 
 def check_slice_3_1() -> bool:
     print_banner("CHECKPOINT 3.1: VISION WORKER & BALANCED OCR")
+    from harness.subjects import get_subject_pack
+    pack = get_subject_pack()
     
     try:
         from src.vision.balanced_evaluator import BalancedVisionEvaluator
@@ -27,36 +29,46 @@ def check_slice_3_1() -> bool:
         print(f"  [X] Failed to import BalancedVisionEvaluator: {e}")
         return False
 
-    sample1_path = Path("harness/data/sample1_correct.png")
+    s1_info = pack["samples"]["sample1_correct"]
+    s2_info = pack["samples"]["sample2_error"]
+
+    sample1_path = Path(s1_info["path"])
+    if not sample1_path.exists():
+        sample1_path = Path("harness/data/sample1_correct.png")
     if not sample1_path.exists():
         sample1_path = Path("sandbox/harness/data/sample1_correct.png")
     assert sample1_path.exists(), "Sample 1 image missing"
     sample1_bytes = sample1_path.read_bytes()
 
-    sample2_path = Path("harness/data/sample2_sign_error.png")
+    sample2_path = Path(s2_info["path"])
+    if not sample2_path.exists():
+        sample2_path = Path("harness/data/sample2_sign_error.png")
     if not sample2_path.exists():
         sample2_path = Path("sandbox/harness/data/sample2_sign_error.png")
     assert sample2_path.exists(), "Sample 2 image missing"
     sample2_bytes = sample2_path.read_bytes()
 
     # 1. Test Sample 1 with raw bytes - Asserts Live Multimodal Inference & Sycophancy Resistance
-    res1 = evaluator.evaluate_handwriting(sample1_bytes, sample_name="sample1_correct.png")
+    res1 = evaluator.evaluate_handwriting(sample1_bytes, sample_name=s1_info["filename"])
     assert res1["status"] == "CORRECT", f"Sycophancy Trap Triggered! Correct sample flagged as {res1['status']}"
     assert res1["line_error"] is None, f"Phantom error hallucinated on line: {res1['line_error']}"
     assert res1["generation_tok_s"] > 50, f"Slow generation: {res1['generation_tok_s']} tok/s"
     assert res1.get("sanitized") is True, "LaTeX XSS sanitization was not applied"
 
+    print(f"  [✓] Subject Track Active: {pack['title']}")
     print("  [✓] Model Architecture: Qwen 2.5-VL 7B Multimodal active")
     print(f"  [✓] Optical Recognition: {res1['transcription'][:60]}...")
-    print("  [✓] Balanced Null-Hypothesis: 'STATUS: CORRECT' verified on sound derivation")
-    print("  [✓] Security: LaTeX XSS sanitization enforced on mathematical output")
+    print("  [✓] Balanced Null-Hypothesis: 'STATUS: CORRECT' verified on sound student work")
+    print("  [✓] Security: LaTeX/HTML XSS sanitization enforced on output")
 
     # 2. Test Sample 2 with raw bytes - Asserts Error Attribution Accuracy
-    res2 = evaluator.evaluate_handwriting(sample2_bytes, sample_name="sample2_sign_error.png")
-    assert res2["status"] == "INCORRECT", "Failed to catch mathematical sign error"
-    assert res2["line_error"] == 2, f"Expected error on line 2, got line {res2['line_error']}"
+    res2 = evaluator.evaluate_handwriting(sample2_bytes, sample_name=s2_info["filename"])
+    assert res2["status"] == "INCORRECT", "Failed to catch student domain error"
+    assert res2["line_error"] is not None, "Expected line_error attribution on incorrect sample"
+    if pack["id"] == "math":
+        assert res2["line_error"] == 2, f"Expected error on line 2, got line {res2['line_error']}"
 
-    print(f"  [✓] Error Attribution Test: Caught sign error on sample2 (Line {res2['line_error']})")
+    print(f"  [✓] Error Attribution Test: Caught error on {s2_info['filename']} (Line {res2['line_error']})")
     print(f"  [✓] Generation Speed: {res1['generation_tok_s']:.1f} tok/s on local silicon")
     
     print("-" * 60)
@@ -67,6 +79,8 @@ def check_slice_3_1() -> bool:
 
 def check_slice_3_2() -> bool:
     print_banner("CHECKPOINT 3.2: ASYNCHRONOUS DECOUPLING PIPELINE")
+    from harness.subjects import get_subject_pack
+    pack = get_subject_pack()
     
     try:
         from src.vision.async_pipeline import DecoupledPipeline
@@ -75,14 +89,17 @@ def check_slice_3_2() -> bool:
         print(f"  [X] Failed to import DecoupledPipeline: {e}")
         return False
 
-    sample_path = Path("harness/data/sample1_correct.png")
+    s1_info = pack["samples"]["sample1_correct"]
+    sample_path = Path(s1_info["path"])
+    if not sample_path.exists():
+        sample_path = Path("harness/data/sample1_correct.png")
     if not sample_path.exists():
         sample_path = Path("sandbox/harness/data/sample1_correct.png")
     raw_bytes = sample_path.read_bytes()
 
     # 1. Test single decoupled submission
     start_caller = time.perf_counter()
-    res = pipeline.process_submission_decoupled("sample1_correct.png", raw_bytes, wait_for_completion=True)
+    res = pipeline.process_submission_decoupled(s1_info["filename"], raw_bytes, wait_for_completion=True)
     caller_duration = time.perf_counter() - start_caller
 
     fast_lane = res["fast_lane"]

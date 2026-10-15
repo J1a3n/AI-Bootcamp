@@ -1,16 +1,16 @@
 # Master Curriculum Plan: Applied AI Systems, Local Infrastructure & Classroom Intelligence
 
-> **Target Learner:** Experienced High-School Mathematics Teacher  
+> **Target Learner:** Experienced High-School Educators Across Disciplines (`math`, `science`, `humanities`, `economics`)  
 > **Role:** Lead Systems Architect & Product Owner (Directs the AI agent harness; no manual syntax typing)  
 > **Hardware:** Personal Gaming PC / Apple Silicon Mac (Local GPU Acceleration via `ollama` / `llama.cpp`)  
-> **Pedagogical Model:** Progressive Disclosure driven by Authentic Engineering Friction (Spiral Curriculum)  
+> **Pedagogical Model:** Progressive Disclosure driven by Authentic Engineering Friction + Pluggable Subject Packs  
 > **Cadence Guidance:** Strongly recommended to complete each Sprint within a short, focused time window (2–3 consecutive evenings or a single weekend afternoon) to maintain context and momentum.
 
 ---
 
 ## Executive Summary & Core Philosophy
 
-This bootcamp is structured as a continuous evolutionary journey across four unified sprints. Rather than learning disconnected toys, the learner builds and iterates upon a single cumulative sandbox that evolves into a production-grade educational platform.
+This bootcamp is structured as a continuous evolutionary journey across four unified sprints. Rather than learning disconnected toys, the learner selects their **Subject Pack** (`math`, `science`, `humanities`, or `economics`) at the start and builds a single cumulative sandbox that evolves into a production-grade educational platform tailored to their classroom.
 
 ```mermaid
 flowchart LR
@@ -22,7 +22,7 @@ flowchart LR
 ### Key Principles
 1. **Mental Models Over Syntax:** The learner acts as the Architect. The AI agent harness handles dependency installation, code generation, and error fixing. The teacher focuses on data flows, hardware limits, network boundaries, and trade-offs.
 2. **Friction-Driven Progression:** Every new tool is introduced only *after* the learner experiences the exact friction caused by its absence (e.g., page refresh data loss demands a database; tunnel URL instability demands an asynchronous worker queue).
-3. **Mathematical Grounding:** High-dimensional vector spaces, cosine distances ($\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}$), Directed Acyclic Graphs (Git), and statistical distributions ($p50/p95/p99$) leverage mathematical expertise to make AI concepts crystal clear.
+3. **Domain-Bridged Mental Models (No Advanced Math Required):** High-dimensional vector spaces (768-Slider Rubric Cards / Chemical Spectra / $\mathbb{R}^{768}$), cosine similarity (Compass Direction / Thematic Alignment / $\frac{\mathbf{u} \cdot \mathbf{v}}{\|\mathbf{u}\|\|\mathbf{v}\|}$), Directed Acyclic Graphs (Lesson Plan Sandbox / Git), and statistical tail distributions (Slowest Lab Group / $p50/p95/p99$) bridge universal teaching craft to deep systems engineering.
 4. **Active Learning via Frequent Neutral Choices:** The mentor never prescribes which choice is "better." The learner evaluates trade-offs between UI, flow, and system designs, and is always free to review and iterate based on classroom experience.
 5. **Security by Default:** Unprompted code reviews and hardening audits occur at every sprint checkpoint, explaining loopholes closed and dangers averted.
 
@@ -56,9 +56,9 @@ flowchart TD
 
 ### Module Sequence
 
-#### Module 1.0: Preamble & Harness Setup
-* **Focus:** Zero code, zero infrastructure. Installing the agent harness (Antigravity, Claude Code, or Codex), verifying the universal CLI test doctor (`python -m harness check 0`), and initializing the dedicated workspace repository.
-* **Outcome:** Clean environment verified; self-healing doctor confirms hardware readiness.
+#### Module 1.0: Preamble, Subject Track Selection & Harness Setup
+* **Focus:** Zero code, zero infrastructure. Selecting the educator's **Subject Pack** (`python -m harness select <math|science|humanities|economics>`), verifying the universal CLI test doctor (`python -m harness check 0`), and initializing the dedicated workspace repository.
+* **Outcome:** Clean environment verified; active Subject Track configured; self-healing doctor confirms hardware readiness.
 
 #### Module 1.1: Sandbox Scaffolding & Dependencies (Bootstrap)
 * **Tech Stack:** Next.js, React, TypeScript, Tailwind CSS, Python virtual environment.

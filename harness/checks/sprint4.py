@@ -18,6 +18,8 @@ def print_banner(title: str):
 
 def check_slice_4_1() -> bool:
     print_banner("CHECKPOINT 4.1: DUAL-AXIS VECTOR SEARCH (pgvector)")
+    from harness.subjects import get_subject_pack
+    pack = get_subject_pack()
     
     try:
         from src.intelligence.vector_engine import DualAxisVectorEngine
@@ -26,30 +28,35 @@ def check_slice_4_1() -> bool:
         print(f"  [X] Failed to import DualAxisVectorEngine: {e}")
         return False
 
-    # 1. Test Query 1: Sign Error Concept Mapping
-    query_sign = "Students who made a transposition sign error"
-    match_sign = engine.query_misconception(query_sign)
+    v_queries = pack["verification_queries"]
+    q1 = v_queries[0]
+    q2 = v_queries[1]
 
-    assert "Sign Error" in match_sign["matched_misconception"], f"Expected sign error match, got: {match_sign}"
-    assert match_sign["dimension"] == 768, f"Invalid vector dimension: {match_sign['dimension']}"
-    assert match_sign["sample_reference"] == "sample2_sign_error.png", f"Reference mismatch: {match_sign['sample_reference']}"
-    assert "Normalized" in match_sign["vector_hygiene"], "Vector norm failed unit sphere check"
+    # 1. Test Query 1: Primary Misconception Mapping
+    query_1 = q1["query"]
+    match_1 = engine.query_misconception(query_1)
 
-    # 2. Test Query 2: Distributive Property Mapping
-    query_dist = "Students who omitted multiplying parentheses on the second term"
-    match_dist = engine.query_misconception(query_dist)
+    assert q1["expected_substring"] in match_1["matched_misconception"], f"Expected '{q1['expected_substring']}', got: {match_1}"
+    assert match_1["dimension"] == 768, f"Invalid vector dimension: {match_1['dimension']}"
+    assert match_1["sample_reference"] == q1["expected_sample"], f"Reference mismatch: {match_1['sample_reference']}"
+    assert "Normalized" in match_1["vector_hygiene"], "Vector norm failed unit sphere check"
 
-    assert "Distributive" in match_dist["matched_misconception"], f"Expected distributive match, got: {match_dist}"
-    assert match_dist["sample_reference"] == "sample3_misconception.png", "Distributive reference mismatch"
+    # 2. Test Query 2: Secondary Misconception Mapping
+    query_2 = q2["query"]
+    match_2 = engine.query_misconception(query_2)
+
+    assert q2["expected_substring"] in match_2["matched_misconception"], f"Expected '{q2['expected_substring']}', got: {match_2}"
+    assert match_2["sample_reference"] == q2["expected_sample"], "Secondary reference mismatch"
 
     # 3. Assert Metric Discriminability: Different concepts have distinct coordinates
-    assert match_sign["matched_misconception"] != match_dist["matched_misconception"], "Vector space collapsed"
+    assert match_1["matched_misconception"] != match_2["matched_misconception"], "Vector space collapsed"
 
+    print(f"  [✓] Subject Track Active: {pack['title']}")
     print("  [✓] Database Extension: pgvector enabled in Supabase Postgres")
-    print(f"  [✓] Coordinate Embeddings Generated: {match_sign['dimension']}-dimensional vector space")
-    print(f"  [✓] Query 1 ('{query_sign}'): Matched {match_sign['matched_misconception']} (Score: {match_sign['cosine_similarity']})")
-    print(f"  [✓] Query 2 ('{query_dist}'): Matched {match_dist['matched_misconception']} (Score: {match_dist['cosine_similarity']})")
-    print(f"  [✓] Vector Hygiene Verified: {match_sign['vector_hygiene']}")
+    print(f"  [✓] Coordinate Embeddings Generated: {match_1['dimension']}-dimensional vector space")
+    print(f"  [✓] Query 1 ('{query_1}'): Matched {match_1['matched_misconception']} (Score: {match_1['cosine_similarity']})")
+    print(f"  [✓] Query 2 ('{query_2}'): Matched {match_2['matched_misconception']} (Score: {match_2['cosine_similarity']})")
+    print(f"  [✓] Vector Hygiene Verified: {match_1['vector_hygiene']}")
     
     print("-" * 60)
     print("  STATUS: ALL CHECKS PASSED (Slice 4.1 Complete!)")
@@ -59,6 +66,8 @@ def check_slice_4_1() -> bool:
 
 def check_slice_4_2() -> bool:
     print_banner("CHECKPOINT 4.2 & CAPSTONE: ANALYTICAL ASSISTANT & OPTIMIZATION")
+    from harness.subjects import get_subject_pack
+    pack = get_subject_pack()
     
     # 1. Text-to-SQL Sandbox Assertions
     try:
@@ -87,6 +96,7 @@ def check_slice_4_2() -> bool:
     assert valid_res["rows_returned"] > 0, "No real analytical rows returned from database"
     assert "Passed Read-Only Engine" in valid_res["security_status"], "Engine read-only lock not confirmed"
 
+    print(f"  [✓] Subject Track Active: {pack['title']}")
     print("  [✓] 3-Tier Security Tier: Database secrets locked to secure backend")
     print("  [✓] Security Assertion: Standard DROP -> Blocked (403 Forbidden)")
     print("  [✓] Security Assertion: Comment-Obfuscated DROP -> Blocked (403 Forbidden)")
@@ -100,7 +110,10 @@ def check_slice_4_2() -> bool:
         print(f"  [X] Failed to import ImageOptimizationPipeline: {e}")
         return False
 
-    sample_path = Path("harness/data/sample1_correct.png")
+    s1_info = pack["samples"]["sample1_correct"]
+    sample_path = Path(s1_info["path"])
+    if not sample_path.exists():
+        sample_path = Path("harness/data/sample1_correct.png")
     if not sample_path.exists():
         sample_path = Path("sandbox/harness/data/sample1_correct.png")
     raw_bytes = sample_path.read_bytes()
