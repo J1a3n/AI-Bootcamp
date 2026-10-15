@@ -1,7 +1,7 @@
 # AI Bootcamp: Systems Architecture, Local Infrastructure & Applied AI
 
-> **Target Learner:** Experienced High-School Educators Across Disciplines (`math`, `science`, `humanities`, `economics`)  
-> **Role:** Lead Systems Architect & Product Owner  
+> **Target Learner:** Experienced Secondary School Teacher Across Disciplines (`math`, `science`, `humanities`, `economics`)  
+> **Role:** Applied AI Architect & Product Owner  
 > **Platform Support:** Google Antigravity (AGY), Claude Code, OpenAI Codex, Cursor  
 > **Curriculum Blueprint:** See [`curriculum_plan.md`](./curriculum_plan.md)  
 > **Multi-Subject Technical Spike:** See [`spike/multi_subject_spike_report.md`](./spike/multi_subject_spike_report.md)
@@ -10,11 +10,11 @@
 
 ## Welcome to the Studio
 
-This program is designed for an experienced classroom educator stepping into the role of **Lead Systems Architect**. Whether you teach **Mathematics, Science (Chemistry/Biology), Humanities (History/English), or Social Sciences (Economics)**, you will not be memorizing boilerplate syntax or typing terminal commands.
+This program is designed for an educator stepping into the role of **Applied AI Architect**. Whether you teach **Mathematics, Science (Chemistry/Biology), Humanities (History/English), or Social Sciences (Economics)**, you will not be memorizing boilerplate syntax or typing terminal commands.
 
 Instead, you select your **Subject Pack** at the start and direct an autonomous AI agent to design, build, harden, and optimize a production-grade educational platform tailored to your subject:
-* Run high-throughput multimodal AI models directly on your home computer's graphics card.
-* Build an instant, sub-second desk-to-projector classroom camera app (PWA) for student notebooks, lab sheets, essays, or graphs.
+* Run multimodal AI models directly on your home computer's graphics card.
+* Build a student desk-to-projector classroom camera app (PWA) for notebooks, lab sheets, essays, or graphs.
 * Decouple presentation time from machine vision compute using an asynchronous task queue.
 * Organize student misconceptions using 768-dimensional concept maps (`pgvector`) and an AI analytical assistant.
 
