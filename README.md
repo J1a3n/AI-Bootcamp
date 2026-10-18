@@ -12,7 +12,7 @@
 
 This program is designed for an educator stepping into the role of **Applied AI Architect**. Whether you teach **Mathematics, Science (Chemistry/Biology), Humanities (History/English), or Social Sciences (Economics)**, you will not be memorizing boilerplate syntax or typing terminal commands.
 
-Instead, you select your **Subject Pack** at the start and direct an autonomous AI agent to design, build, harden, and optimize a production-grade educational platform tailored to your subject:
+Instead, you select your **Subject Pack** at the start and direct an autonomous AI agent to design, build, harden, and optimize a working classroom AI platform tailored to your subject:
 * Run multimodal AI models directly on your home computer's graphics card.
 * Build a student desk-to-projector classroom camera app (PWA) for notebooks, lab sheets, essays, or graphs.
 * Decouple presentation time from machine vision compute using an asynchronous task queue.
@@ -22,7 +22,7 @@ Instead, you select your **Subject Pack** at the start and direct an autonomous 
 
 ## Pluggable Subject Tracks
 
-> **Same Core Production Experience Across Every Subject:** Regardless of which track you choose, you build the **exact same 4-Sprint production system** — a local GPU inference engine & outbound bridge (Sprint 1), a `< 1s` Desk-to-Projector classroom camera PWA with S3/Postgres persistence (Sprint 2), an asynchronous `Qwen 2.5-VL` handwriting OCR & balanced LLM rubric evaluator (Sprint 3), and a 768-D `pgvector` misconception search & Text-to-SQL assistant (Sprint 4). Only the student notebook worksheets, domain rubric criteria, and teaching analogies adapt to your subject.
+> **Same Core Classroom Experience Across Every Subject:** Regardless of which track you choose, you build the **exact same 4-Sprint system** — a local GPU inference engine & outbound bridge (Sprint 1), a `< 1s` Desk-to-Projector classroom camera PWA with S3/Postgres persistence (Sprint 2), an asynchronous `Qwen 2.5-VL` handwriting OCR & balanced LLM rubric evaluator (Sprint 3), and a 768-D `pgvector` misconception search & Text-to-SQL assistant (Sprint 4). Only the student notebook worksheets, domain rubric criteria, and teaching analogies adapt to your subject.
 
 At the beginning of Sprint 1, your AI Mentor configures your workspace for your subject track:
 * **`math` — Mathematics (Algebra & Functions):** Multi-step equations, sign transposition errors, binomial expansion misconceptions.

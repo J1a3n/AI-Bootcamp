@@ -10,7 +10,7 @@
 
 ## Executive Summary & Core Philosophy
 
-This bootcamp is structured as a continuous evolutionary journey across four unified sprints. Rather than learning disconnected toys, the learner selects their **Subject Pack** (`math`, `science`, `humanities`, or `economics`) at the start and builds a single cumulative sandbox that evolves into a production-grade educational platform tailored to their classroom.
+This bootcamp is structured as a continuous evolutionary journey across four unified sprints. Rather than learning disconnected toys, the learner selects their **Subject Pack** (`math`, `science`, `humanities`, or `economics`) at the start and builds a single cumulative sandbox that evolves into a practical classroom AI platform tailored to their subject.
 
 ```mermaid
 flowchart LR
@@ -91,7 +91,7 @@ flowchart TD
 * **Checkpoint Audit:** Automated attack simulation verifying unauthenticated requests receive `401 Unauthorized`.
 
 #### Module 1.5: Code Review & The Model "Battleground"
-* **Activity:** Side-by-side code review of the production codebase using Gemini 3.8 Flash vs. the local model.
+* **Activity:** Side-by-side code review of the project codebase using Gemini 3.8 Flash vs. the local model.
 * **Key Lessons:**
   1. *Context Windows in Practice:* Experiencing local context boundaries ($4\text{k} - 32\text{k}$ tokens bound by VRAM) vs. massive frontier context ($1\text{M}+$ tokens ingesting entire repositories).
   2. *Code Review in Agentic Dev:* Why human/AI auditing of generated code is mandatory.
@@ -266,7 +266,7 @@ flowchart TD
   2. *Propose:* The teacher acts as Lead Architect, proposing an optimization (client-side WebP compression via HTML5 Canvas).
   3. *Implement:* Directs the agent on a new Git feature branch (`feature/client-webp-compression`).
   4. *Evaluate:* Runs the automated local Eval Suite (from Module 2.5) to quantitatively prove the fix (payload shrinks by 95%, upload drops to 0.38s).
-  5. *Regression Test & Merge:* Validates that the change caused zero regressions in mathematical accuracy, merges the PR, and triggers production deployment.
+  5. *Regression Test & Merge:* Validates that the change caused zero regressions in accuracy, merges the PR, and triggers live deployment.
 
 ---
 
